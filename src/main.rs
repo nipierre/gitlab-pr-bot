@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate dotenv_codegen;
-
 use clap::{App, Arg};
+use dotenv::dotenv;
 use log::{debug, info};
 use reqwest::Error;
 use reqwest::header::CONTENT_TYPE;
@@ -78,10 +76,11 @@ async fn main() -> Result<(), Error> {
         vec_gitlab
     }
     else if matches.occurrences_of("dotenv") == 1 {
-        let urls: Vec<String> = dotenv!("GITLAB_URL").split(':')
+        dotenv().ok();
+        let urls: Vec<String> = env::var("GITLAB_URL").unwrap().split(':')
                                                      .map(String::from)
                                                      .collect();
-        let mut tokens: Vec<String> = dotenv!("GITLAB_TOKEN").split(':')
+        let mut tokens: Vec<String> = env::var("GITLAB_TOKEN").unwrap().split(':')
                                                              .map(String::from)
                                                              .collect();
         let mut vec_gitlab: Vec<GitLab> = vec![];
@@ -164,7 +163,7 @@ async fn main() -> Result<(), Error> {
                 debug!("{:?}", json);
 
                 let teams_response = client
-                                        .post(dotenv!("TEAMS_WEBHOOK"))
+                                        .post(&env::var("TEAMS_WEBHOOK").unwrap())
                                         .header(CONTENT_TYPE, "application/json")
                                         .body(json)
                                         .send()
