@@ -2,8 +2,11 @@
 ## [Unreleased]
 
 
-<a name="0.0.1"></a>
-## 0.0.1 - 2020-11-08
+<a name="0.2.0"></a>
+## 0.2.0 - 2020-11-08
+### Add
+- rust build and test action
+
 ### Doc
 - add changelog
 
@@ -12,4 +15,4 @@
 - add first version of project
 
 
-[Unreleased]: https://github.com/nipierre/gitlab-pr-bot/compare/0.0.1...HEAD
+[Unreleased]: https://github.com/nipierre/gitlab-pr-bot/compare/0.2.0...HEAD
