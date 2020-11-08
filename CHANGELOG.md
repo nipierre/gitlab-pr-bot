@@ -3,7 +3,7 @@
 
 
 <a name="0.2.0"></a>
-## 0.2.0 - 2020-11-08
+## 0.0.1 - 2020-11-08
 ### Add
 - rust build and test action
 
