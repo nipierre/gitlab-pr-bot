@@ -1,0 +1,19 @@
+[package]
+name = "gitlab-pr-bot"
+version = "0.0.1"
+authors = [
+  "Nicolas Pierre <nico.pierre@icloud.com>",
+]
+edition = "2018"
+
+[dependencies]
+clap = "2.33.1"
+dotenv_codegen = "0.15.0"
+log = "0.4"
+regex = "1.4.2"
+reqwest = {version = "0.10", features = ["json"]}
+serde = "^1.0"
+serde_derive = "^1.0"
+serde_json = "^1.0"
+simple_logger = "1.6.0"
+tokio = { version = "0.2.6", features = ["full"] }
