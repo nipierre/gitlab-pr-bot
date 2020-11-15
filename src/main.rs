@@ -35,6 +35,14 @@ async fn main() -> Result<(), Error> {
         .help("Get GitLab infos from .env")
     )
     .arg(
+      Arg::with_name("number-reviewers")
+        .long("number-reviewers")
+        .value_name("NUMBER-REVIEWER")
+        .help("Sets the required number of reviewers")
+        .default_value("1")
+        .takes_value(true),
+    )
+    .arg(
       Arg::with_name("token")
         .long("token")
         .value_name("TOKEN")
@@ -110,6 +118,11 @@ async fn main() -> Result<(), Error> {
         ]
     };
 
+    let required_reviewer = matches.value_of("number-reviewers")
+                                   .unwrap()
+                                   .parse::<usize>()
+                                   .expect("Unable to parse number-reviewers");
+
     info!("Number of GitLab projects : {}", gitlabs.len());
 
     let client = reqwest::Client::new();
@@ -156,7 +169,7 @@ async fn main() -> Result<(), Error> {
 
             for pr in prs {
 
-                let card = Card::new(pr);
+                let card = Card::new(pr, required_reviewer);
 
                 let json = serde_json::to_string(&card).unwrap().replace("attype","@type").replace("atcontext","@context");
 
@@ -297,7 +310,7 @@ mod test {
             approvals_before_merge: None
         };
 
-        let card: Card = Card::new(pr);
+        let card: Card = Card::new(pr, 1);
 
         assert_eq!(card.potentialAction[0].target[0],"greatURL");
         assert_eq!(card.sections[0].activityTitle,format!("Toto Tata (toto123) needs reviewer(s) for this PR : *Title*"));
