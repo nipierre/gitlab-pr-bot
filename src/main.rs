@@ -317,7 +317,7 @@ mod test {
         assert_eq!(card.sections[0].activitySubtitle,"On *myproject/myrepo*");
         assert_eq!(card.sections[0].activityText,"This is a description");
         assert_eq!(card.sections[0].activityImage,"greatURL");
-        assert_eq!(card.sections[0].facts[0].value,"1");
+        assert_eq!(card.sections[0].facts[0].value,"0");
         assert_eq!(card.sections[0].facts[1].value,"Titi Tata (titi123)");
         assert_eq!(card.sections[0].facts[2].value,"Source");
         assert_eq!(card.sections[0].facts[3].value,"Target");
