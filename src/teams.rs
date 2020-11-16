@@ -67,11 +67,11 @@ pub struct Card {
 }
 
 impl Facts {
-    pub fn new(pr: Pr) -> Vec<Facts> {
+    pub fn new(pr: Pr, required_reviewer: usize) -> Vec<Facts> {
         vec![
             Facts {
                 name: "Missing Reviewer(s)".into(),
-                value: (2-pr.assignees.len()).to_string()
+                value: (required_reviewer-pr.assignees.len()).to_string()
             },
             Facts {
                 name: "Assigned to".into(),
@@ -95,7 +95,7 @@ impl Facts {
 
 
 impl Sections {
-    pub fn new(pr: Pr) -> Vec<Sections> {
+    pub fn new(pr: Pr, required_reviewer: usize) -> Vec<Sections> {
         vec![
             Sections {
                 activityTitle: format!("{owner} ({username}) needs reviewer(s) for this PR : *{title}*",
@@ -105,7 +105,7 @@ impl Sections {
                 activitySubtitle: format!("On *{}*", extract_project_name(pr.references.full.clone())),
                 activityText: format!("{}", pr.description),
                 activityImage: format!("{}", pr.author.avatar_url),
-                facts: Facts::new(pr),
+                facts: Facts::new(pr, required_reviewer),
                 markdown: true
             }
         ]
@@ -130,14 +130,14 @@ impl PotentialAction {
 
 
 impl Card {
-    pub fn new(pr: Pr) -> Card {
+    pub fn new(pr: Pr, required_reviewer: usize) -> Card {
         Card {
             attype: "MessageCard".into(),
             atcontext: "http://schema.org/extensions".into(),
             themeColor: "0076D7".into(),
             summary: "This PR misses Reviewer(s) !".into(),
             potentialAction: PotentialAction::new(pr.web_url.clone()),
-            sections: Sections::new(pr)
+            sections: Sections::new(pr, required_reviewer)
         }
     }
 }
