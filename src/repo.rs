@@ -9,7 +9,7 @@ pub struct Namespace {
     pub full_path: String,
     pub parent_id: Option<u32>,
     pub avatar_url: Option<String>,
-    pub web_url: String
+    pub web_url: String,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -31,5 +31,5 @@ pub struct Repo {
     pub forks_count: usize,
     pub star_count: usize,
     pub last_activity_at: String,
-    pub namespace: Namespace
+    pub namespace: Namespace,
 }

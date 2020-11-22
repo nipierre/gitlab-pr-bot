@@ -7,15 +7,14 @@ pub struct Author {
     pub username: String,
     pub state: String,
     pub avatar_url: String,
-    pub web_url: String
+    pub web_url: String,
 }
-
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct References {
     pub short: String,
     pub relative: String,
-    pub full: String
+    pub full: String,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
@@ -23,16 +22,14 @@ pub struct TimeStats {
     pub time_estimate: f32,
     pub total_time_spent: f32,
     pub human_time_estimate: Option<f32>,
-    pub human_total_time_spent: Option<f32>
+    pub human_total_time_spent: Option<f32>,
 }
-
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct TaskCompletionStatus {
     pub count: usize,
-    pub completed_count: usize
+    pub completed_count: usize,
 }
-
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Pr {
@@ -77,5 +74,5 @@ pub struct Pr {
     pub task_completion_status: Option<TaskCompletionStatus>,
     pub has_conflicts: Option<bool>,
     pub blocking_discussions_resolved: Option<bool>,
-    pub approvals_before_merge: Option<String>
+    pub approvals_before_merge: Option<String>,
 }
